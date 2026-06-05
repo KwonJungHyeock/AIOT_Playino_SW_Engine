@@ -1,11 +1,10 @@
 import Phaser from 'phaser';
-import { FONTS, COLORS, NUM, SCENES } from '../../shared/theme.js';
-import Button from '../objects/Button.js';
-import Eddie from '../objects/Eddie.js';
+import { NUM, SCENES } from '../../shared/theme.js';
 import { placeBg } from '../assets.js';
 import { fadeIn, goTo } from '../fx/transition.js';
-import { addVignette } from '../fx/textures.js';
 
+// 타이틀: 배경 아트에 타이틀/시작 버튼/안내가 이미 포함됨.
+// 코드는 배경을 깔고 입력만 받는다(중복 텍스트·버튼을 그리지 않음).
 export default class TitleScene extends Phaser.Scene {
   constructor() { super(SCENES.TITLE); }
 
@@ -13,21 +12,17 @@ export default class TitleScene extends Phaser.Scene {
     const { width, height } = this.scale;
     fadeIn(this);
     placeBg(this, 'title-bg', NUM.bg);
-    addVignette(this);
 
-    this.add.text(width / 2, 200, 'PLAYINO', {
-      fontFamily: FONTS.display, fontSize: '92px', color: COLORS.text, fontStyle: '900',
-    }).setOrigin(0.5);
-    this.add.text(width / 2, 280, 'E S C A P E   R O O M', {
-      fontFamily: FONTS.display, fontSize: '26px', color: COLORS.eddie,
-    }).setOrigin(0.5).setAlpha(0.9);
+    // 배경의 '시작하기' 버튼 위에 은은한 호버 글로우(클릭 유도). 위치는 아트 기준 추정.
+    const hot = this.add.rectangle(width / 2, height - 96, 300, 64, NUM.eddie, 0.001)
+      .setInteractive({ useHandCursor: true });
+    const glow = this.add.rectangle(width / 2, height - 96, 300, 64, NUM.eddie, 0)
+      .setBlendMode(Phaser.BlendModes.ADD);
+    this.tweens.add({ targets: glow, fillAlpha: 0.12, duration: 1100, yoyo: true, repeat: -1, ease: 'Sine.inOut' });
 
-    new Eddie(this, width / 2, 410, 0.8);
-
-    new Button(this, width / 2, 540, 'START', () => goTo(this, SCENES.LOGIN));
-
-    this.add.text(width / 2, height - 30, 'Arduino Uno · Web Serial · K-12', {
-      fontFamily: FONTS.body, fontSize: '13px', color: COLORS.textDim,
-    }).setOrigin(0.5);
+    const start = () => { if (this._went) return; this._went = true; goTo(this, SCENES.LOGIN); };
+    hot.on('pointerdown', start);
+    this.input.keyboard.once('keydown-ENTER', start);
+    this.input.keyboard.once('keydown-SPACE', start);
   }
 }
