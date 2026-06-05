@@ -9,10 +9,6 @@ import { addVignette } from '../fx/textures.js';
 export default class TitleScene extends Phaser.Scene {
   constructor() { super(SCENES.TITLE); }
 
-  preload() {
-    // TODO(claude-code): queueSceneBg(this, 'title');
-  }
-
   create() {
     const { width, height } = this.scale;
     fadeIn(this);

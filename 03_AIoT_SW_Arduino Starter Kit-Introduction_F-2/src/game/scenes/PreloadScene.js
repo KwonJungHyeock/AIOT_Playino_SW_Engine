@@ -1,6 +1,7 @@
 import Phaser from 'phaser';
 import { BASE, NUM, COLORS, FONTS, SCENES } from '../../shared/theme.js';
 import { ensureGlow, ensureVignette } from '../fx/textures.js';
+import { queueSceneBg } from '../assets.js';
 import { goTo } from '../fx/transition.js';
 
 export default class PreloadScene extends Phaser.Scene {
@@ -15,9 +16,12 @@ export default class PreloadScene extends Phaser.Scene {
     const barW = 360;
     const back = this.add.rectangle(width / 2, height / 2 + 10, barW, 6, NUM.bg2).setStrokeStyle(1, NUM.eddie, 0.3);
     const bar = this.add.rectangle(width / 2 - barW / 2, height / 2 + 10, 0, 6, NUM.eddie).setOrigin(0, 0.5);
-    this.load.on('progress', (p) => bar.width = barW * p);
+    const pct = this.add.text(width / 2, height / 2 + 34, '0%', { fontFamily: FONTS.body, fontSize: '12px', color: COLORS.textDim }).setOrigin(0.5);
+    this.load.on('progress', (p) => { bar.width = barW * p; pct.setText(Math.round(p * 100) + '%'); });
 
-    // TODO(claude-code): 실제 에셋은 장면별 preload에서 queueSceneBg() 사용
+    // 장면 배경을 전역 1회 로드 → 로딩바가 실제 바이트로 움직이고, 각 씬은 즉시 placeBg
+    queueSceneBg(this, 'title');
+    queueSceneBg(this, 'login');
   }
 
   create() {
