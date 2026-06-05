@@ -1,7 +1,7 @@
 import Phaser from 'phaser';
 import { BASE, NUM, COLORS, FONTS, SCENES } from '../../shared/theme.js';
 import { ensureGlow, ensureVignette } from '../fx/textures.js';
-import { queueSceneBg } from '../assets.js';
+import { queueSceneBg, ASSET_ROOT } from '../assets.js';
 import { goTo } from '../fx/transition.js';
 
 export default class PreloadScene extends Phaser.Scene {
@@ -22,6 +22,11 @@ export default class PreloadScene extends Phaser.Scene {
     // 장면 배경을 전역 1회 로드 → 로딩바가 실제 바이트로 움직이고, 각 씬은 즉시 placeBg
     queueSceneBg(this, 'title');
     queueSceneBg(this, 'login');
+    queueSceneBg(this, 'coldopen');
+    // 캐릭터 스프라이트(없으면 절차적 폴백) — 누락돼도 진행
+    this.load.image('eddie', `${ASSET_ROOT}/characters/eddie.png`);
+    this.load.image('eddie_side', `${ASSET_ROOT}/characters/eddie_side.png`);
+    this.load.on('loaderror', (f) => console.info(`[assets] '${f.key}' 누락 → 폴백`));
   }
 
   create() {

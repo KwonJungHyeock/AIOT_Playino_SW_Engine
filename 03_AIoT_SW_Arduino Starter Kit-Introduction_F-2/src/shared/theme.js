@@ -34,6 +34,7 @@ export const SCENES = {
   SPLASH:  'Splash',
   TITLE:   'Title',
   LOGIN:   'Login',
+  COLDOPEN:'ColdOpen',
   HUB:     'ComingSoon',
   EPISODE: 'Episode',
 };
