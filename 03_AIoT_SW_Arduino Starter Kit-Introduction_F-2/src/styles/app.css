@@ -21,13 +21,16 @@ body { font-family: 'Pretendard', 'Space Grotesk', sans-serif; color: var(--text
 #overlay .pane { pointer-events: auto; }
 
 /* 로그인 클래스코드 입력 (스펙: 네이티브 input은 DOM 오버레이로) */
+/* 배경 아트 중앙의 EDDIE 오브를 가리지 않도록 하단 중앙에 배치 */
 .login-card {
-  background: rgba(10, 14, 23, 0.92);
-  border: 1px solid rgba(111, 255, 214, 0.25);
+  align-self: end;
+  margin-bottom: 7vh;
+  background: rgba(6, 10, 18, 0.86);
+  border: 1px solid rgba(111, 255, 214, 0.3);
   border-radius: 14px;
-  padding: 28px 32px;
+  padding: 22px 30px;
   text-align: center;
-  backdrop-filter: blur(4px);
+  backdrop-filter: blur(5px);
 }
 .login-card h2 { font-family: 'Orbitron', sans-serif; color: var(--eddie); letter-spacing: 2px; margin: 0 0 4px; }
 .login-card p { color: var(--text-dim); margin: 0 0 18px; font-size: 14px; }
