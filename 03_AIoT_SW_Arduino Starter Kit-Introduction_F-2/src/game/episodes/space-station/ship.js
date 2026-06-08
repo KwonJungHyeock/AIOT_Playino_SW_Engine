@@ -3,15 +3,15 @@
 // x,y 는 1280×720 좌표(맵 위 스테이션 위치).
 export const SHIP_MISSIONS = [
   { key: 'power', icon: '⚡', name: '전력 복구', mission: 'power',
-    objective: '발전 패널을 태양 방향에 정렬해 메인 전력을 올려라.', x: 300, y: 250 },
+    objective: '발전 패널을 태양 방향에 정렬해 메인 전력을 올려라.', x: 220, y: 150 },
   { key: 'lifesupport', icon: '🌬', name: '생명유지', mission: 'lifesupport',
-    objective: '거주 구역 온·습도를 안전 범위로 맞춰라.', x: 980, y: 250 },
+    objective: '거주 구역 온·습도를 안전 범위로 맞춰라.', x: 1035, y: 150 },
   { key: 'attitude', icon: '🧭', name: '자세 제어', mission: 'attitude',
-    objective: '기울어진 정거장 자세를 수평으로 안정화하라.', x: 300, y: 500 },
+    objective: '기울어진 정거장 자세를 수평으로 안정화하라.', x: 230, y: 548 },
   { key: 'docking', icon: '📡', name: '도킹·통신', mission: 'docking',
-    objective: '도킹 포트 거리를 맞춰 통신을 복구하라.', x: 980, y: 500 },
+    objective: '도킹 포트 거리를 맞춰 통신을 복구하라.', x: 1030, y: 548 },
   { key: 'core', icon: '🧠', name: '코어 재가동', mission: 'core',
-    objective: '자세와 전력을 동시에 유지해 메인 코어를 재시작하라.', x: 640, y: 375 },
+    objective: '자세와 전력을 동시에 유지해 메인 코어를 재시작하라.', x: 640, y: 358 },
 ];
 
 // 진행도 저장(localStorage) — 이어하기. 게임은 이 모듈로만 진행도를 다룬다.

@@ -16,7 +16,7 @@ export default class ShipScene extends Phaser.Scene {
     this.done = loadDone();
     this.current = currentMission(this.done);
     this.speed = 270;
-    this.bounds = { x1: 130, y1: 150, x2: 1150, y2: 630 };
+    this.bounds = { x1: 70, y1: 80, x2: 1210, y2: 650 };
 
     fadeIn(this);
     this._buildMap();
